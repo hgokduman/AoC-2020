@@ -9,3 +9,8 @@ def GetStringFromInput(day):
 
 def GetListFromInput(day):
     return GetStringFromInput(day).splitlines()
+
+def ShowAnswers(func, listOfArgs):
+    answers = map(func, listOfArgs)
+    for i, val in enumerate(answers):
+        print(f"Part {i+1}: {val}")
