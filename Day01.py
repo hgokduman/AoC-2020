@@ -6,6 +6,9 @@ import numpy as np
 from itertools import permutations
 
 class Day01(Puzzle.Puzzle):
+    def PrepareData(self):
+        self.data = self.Resource.SplitLines().Numeric().Get()
+
     def GetSumOfMultiplication(self, length, target=2020):
         self.Reset()
         for x in permutations(self.data, length):
@@ -18,5 +21,4 @@ class Day01(Puzzle.Puzzle):
     def SolvePartTwo(self):
         return self.GetSumOfMultiplication(3)
 
-data = Resource(1).SplitLines().Numeric().Get()
-Display.DisplayAnswers(Day01(data))
+Display.DisplayAnswers(Day01(Resource(1)))

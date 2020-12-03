@@ -5,6 +5,9 @@ from AoC import Puzzle
 class Day02(Puzzle.Puzzle):
     validPasswords = 0
 
+    def PrepareData(self):
+        self.data = self.Resource.SplitLines().RegEx("([0-9]+)-([0-9]+) ([A-z]): ([A-z]+)").Get()
+
     def SolvePartOne(self):
         self.Reset()
         for DigitOne, DigitTwo, Char, Password in self.data:
@@ -20,5 +23,4 @@ class Day02(Puzzle.Puzzle):
     def Reset(self):
         self.validPasswords = 0
 
-data = Resource(2).SplitLines().RegEx("([0-9]+)-([0-9]+) ([A-z]): ([A-z]+)").Get()
-Display.DisplayAnswers(Day02(data))
+Display.DisplayAnswers(Day02(Resource(2)))

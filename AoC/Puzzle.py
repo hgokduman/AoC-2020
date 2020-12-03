@@ -1,8 +1,12 @@
 class Puzzle:
-    data = None
+    Resource = None
 
     def __init__(self, inp):
-        self.data = inp
+        self.Resource = inp
+        self.PrepareData()
+
+    def PrepareData(self):
+        pass
 
     def SolvePartOne(self):
         pass

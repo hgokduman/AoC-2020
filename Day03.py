@@ -7,6 +7,9 @@ class Day03(Puzzle.Puzzle):
     Trees = 0
     posX, posY = [0, 0]
 
+    def PrepareData(self):
+        self.data = self.Resource.SplitLines().Get()
+
     def CountNumberOfTrees(self, right, down):
         self.Reset()
 
@@ -14,7 +17,7 @@ class Day03(Puzzle.Puzzle):
             self.Trees += 1 if self.GetValue(self.posY, self.posX) == "#" else 0
             self.posX = (self.posX+right) % len(self.data[self.posY])
             self.posY += down
-            if self.posY >= len(data):
+            if self.posY >= len(self.data):
                 break
 
         return (self.Trees)
@@ -32,5 +35,4 @@ class Day03(Puzzle.Puzzle):
         self.posX, self.posY = [0, 0]
         self.Trees = 0
 
-data = Resource(3).SplitLines().Get()
-Display.DisplayAnswers(Day03(data))
+Display.DisplayAnswers(Day03(Resource(3)))
