@@ -28,7 +28,7 @@ class Day04(Puzzle.Puzzle):
                 p["pid"] = re.match("^[0-9]{9}$", p["pid"]) is not None
                 p["hcl"] = re.match("^#[0-9a-f]{6}$", p["hcl"]) is not None
                 p["hgt"] = False if re.match("([0-9]+)(in|cm)", p["hgt"]) is None else (int(p["hgt"][:-2]), p["hgt"][-2:])
-                p["hgt"] = False if p["hgt"] == False else (p["hgt"][1] == "cm" and 150 <= p["hgt"][0] <= 193) or (p["hgt"][1] == "in" and 59 <= p["hgt"][0] <= 76)
+                p["hgt"] = False if not p["hgt"] else (p["hgt"][1] == "cm" and 150 <= p["hgt"][0] <= 193) or (p["hgt"][1] == "in" and 59 <= p["hgt"][0] <= 76)
                 ValidPasswords += 1 if list(p.values()).count(False) == 0 else 0
 
         return(ValidPasswords)
