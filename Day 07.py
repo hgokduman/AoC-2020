@@ -24,12 +24,7 @@ class Day07(Puzzle.Puzzle):
 
     def BagsRequired(self, color):
         InnerBags = 0
-        RulesFound = self.rules[color]
-        if RulesFound is not None:
-            for c, a in RulesFound.items():
-                InnerBags += a
-                BagsInside = a*self.BagsRequired(c)
-                InnerBags += BagsInside
+        InnerBags += sum([a + a*self.BagsRequired(c) for c, a in self.rules[color].items()])
         return InnerBags
 
     def SolvePartOne(self):
