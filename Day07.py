@@ -23,7 +23,6 @@ class Day07(Puzzle.Puzzle):
     def SolvePartOne(self):
         return len(self.PossibleColors(["shiny gold"]))
 
-
     def SolvePartTwo(self):
         return self.BagsInside("shiny gold")
 
