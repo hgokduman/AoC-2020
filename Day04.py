@@ -1,7 +1,6 @@
 from AoC.Resource import Resource
 from AoC import Display
 from AoC import Puzzle
-import numpy as np
 import re
 
 class Day04(Puzzle.Puzzle):

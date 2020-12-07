@@ -1,7 +1,6 @@
 from AoC.Resource import Resource
 from AoC import Display
 from AoC import Puzzle
-import numpy as np
 import itertools 
 
 class Day05(Puzzle.Puzzle):
