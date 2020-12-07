@@ -9,8 +9,8 @@ class Day07(Puzzle.Puzzle):
     def PrepareData(self):
         self.data = self.Resource.SplitLines().Get()
         for r in self.data:
-            outer, inner = r.split(" contain ", maxsplit=1)
-            self.rules[outer.replace(" bags", "")] = {y:int(x) for x,y in re.compile("(\d+) ([A-z\s]+) bags?").findall(inner)}
+            outer, inner = r.split(" bags contain ", maxsplit=1)
+            self.rules[outer] = {y:int(x) for x,y in re.compile("([0-9]+) ([a-z ]+) bags?").findall(inner)}
 
     def PossibleColors(self, targetColors):
         Colors = [outer for outer, inner in self.rules.items() if len(set(targetColors).intersection(inner.keys())) > 0]
