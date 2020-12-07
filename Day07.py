@@ -4,7 +4,6 @@ from AoC import Puzzle
 import re
 
 class Day07(Puzzle.Puzzle):
-
     rules = {}
 
     def PrepareData(self):
@@ -13,24 +12,19 @@ class Day07(Puzzle.Puzzle):
             outer, inner = r.split(" contain ", maxsplit=1)
             self.rules[outer.replace(" bags", "")] = {y:int(x) for x,y in re.compile("(\d+) ([A-z\s]+) bags?").findall(inner)}
 
-    def OuterBagCanContain(self, targetColors):
-        Colors = []
-        OuterColorsFound = [outer for outer, inner in self.rules.items() if len(set(targetColors).intersection(inner.keys())) > 0]
-        Colors += OuterColorsFound
-        if len(OuterColorsFound) > 0:
-            Colors += self.OuterBagCanContain(OuterColorsFound)
+    def PossibleColors(self, targetColors):
+        Colors = [outer for outer, inner in self.rules.items() if len(set(targetColors).intersection(inner.keys())) > 0]
+        Colors += self.PossibleColors(Colors) if len(Colors) > 0 else []
         return list(set(Colors))
 
-    def BagsRequired(self, color):
-        InnerBags = 0
-        InnerBags += sum([a + a*self.BagsRequired(c) for c, a in self.rules[color].items()])
-        return InnerBags
+    def BagsInside(self, color):
+        return sum([a + a*self.BagsInside(c) for c, a in self.rules[color].items()])
 
     def SolvePartOne(self):
-        return len(self.OuterBagCanContain(["shiny gold"]))
+        return len(self.PossibleColors(["shiny gold"]))
 
 
     def SolvePartTwo(self):
-        return self.BagsRequired("shiny gold")
+        return self.BagsInside("shiny gold")
 
 Display.DisplayAnswers(Day07(Resource(7)))
