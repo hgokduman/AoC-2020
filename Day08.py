@@ -1,7 +1,6 @@
 from AoC.Resource import Resource
 from AoC import Display
 from AoC import Puzzle
-import re
 
 class Day08(Puzzle.Puzzle):
     instructions = []
@@ -41,18 +40,18 @@ class Day08(Puzzle.Puzzle):
         _, _, Accumulator = self.Run(self.instructions)
         return Accumulator
 
-
     def SolvePartTwo(self):
         for i in range(len(self.instructions)):
             newInstructions = self.instructions.copy()
-            if newInstructions[i][0] in ["nop", "jmp"]:
-                func, arg = newInstructions[i]
+            func, arg = newInstructions[i]
+            if func in ["nop", "jmp"]:
                 func = "nop" if func == "jmp" else "jmp"
                 newInstructions[i] = (func, arg)
                 Completed, _, Accumulator = self.Run(newInstructions)
 
                 if Completed:
                     return Accumulator
-                
 
+        return None
+                
 Display.DisplayAnswers(Day08(Resource(8)))
