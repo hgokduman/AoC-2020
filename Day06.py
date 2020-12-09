@@ -14,4 +14,5 @@ class Day06(Puzzle.Puzzle):
     def SolvePartTwo(self):
         return sum([len(functools.reduce(operator.and_, [set(x) for x in p])) for p in [g for g in self.data]])
 
-Display.DisplayAnswers(Day06(Resource(6)))
+if __name__ == '__main__':
+    Display.DisplayAnswers(Day06(Resource(6)))

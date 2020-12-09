@@ -23,4 +23,5 @@ class Day02(Puzzle.Puzzle):
     def Reset(self):
         self.validPasswords = 0
 
-Display.DisplayAnswers(Day02(Resource(2)))
+if __name__ == '__main__':
+    Display.DisplayAnswers(Day02(Resource(2)))

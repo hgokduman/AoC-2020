@@ -20,4 +20,5 @@ class Day01(Puzzle.Puzzle):
     def SolvePartTwo(self):
         return self.GetSumOfMultiplication(3)
 
-Display.DisplayAnswers(Day01(Resource(1)))
+if __name__ == '__main__':
+    Display.DisplayAnswers(Day01(Resource(1)))

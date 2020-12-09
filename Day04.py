@@ -32,4 +32,5 @@ class Day04(Puzzle.Puzzle):
 
         return(ValidPasswords)
 
-Display.DisplayAnswers(Day04(Resource(4)))
+if __name__ == '__main__':
+    Display.DisplayAnswers(Day04(Resource(4)))

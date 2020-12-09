@@ -33,4 +33,5 @@ class Day09(Puzzle.Puzzle):
         ContiguousSet = self.FindContiguousSet(Number, Index)
         return min(ContiguousSet)+max(ContiguousSet)
                 
-Display.DisplayAnswers(Day09(Resource(9)))
+if __name__ == '__main__':
+    Display.DisplayAnswers(Day09(Resource(9)))

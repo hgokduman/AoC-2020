@@ -30,4 +30,5 @@ class Day05(Puzzle.Puzzle):
         FreeSeats = [x for x in AllSeats if x not in OccupiedSeats]
         return list(filter(lambda x: x-1 in OccupiedSeats and x+1 in OccupiedSeats, FreeSeats))[0]
 
-Display.DisplayAnswers(Day05(Resource(5)))
+if __name__ == '__main__':
+    Display.DisplayAnswers(Day05(Resource(5)))

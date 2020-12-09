@@ -26,4 +26,5 @@ class Day07(Puzzle.Puzzle):
     def SolvePartTwo(self):
         return self.BagsInside("shiny gold")
 
-Display.DisplayAnswers(Day07(Resource(7)))
+if __name__ == '__main__':
+    Display.DisplayAnswers(Day07(Resource(7)))

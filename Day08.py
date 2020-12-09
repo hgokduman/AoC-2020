@@ -53,5 +53,6 @@ class Day08(Puzzle.Puzzle):
                     return Accumulator
 
         return None
-                
-Display.DisplayAnswers(Day08(Resource(8)))
+
+if __name__ == '__main__':        
+    Display.DisplayAnswers(Day08(Resource(8)))
