@@ -17,7 +17,7 @@ class Day10(Puzzle.Puzzle):
 
     def SolvePartTwo(self):
         seq = [len(list(values)) for gap,values in groupby(self.gaps) if gap==1]
-        return reduce(operator.mul, [7 if x == 4 else 4 if x == 3 else x for x in seq if x != 1])
+        return reduce(operator.mul, [7 if x == 4 else 4 if x == 3 else x for x in seq if x != 1], 1)
                 
 if __name__ == '__main__':
     Display.DisplayAnswers(Day10(Resource(10)))
