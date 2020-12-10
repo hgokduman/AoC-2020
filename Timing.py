@@ -20,7 +20,7 @@ def TimeIt(puzzleClass):
     return timing
 
 
-for module_name in [x.name.replace(".py", "") for x in os.scandir(".") if x.name.startswith("Day") and x.name.endswith(".py")]:
+for module_name in sorted([x.name.replace(".py", "") for x in os.scandir(".") if x.name.startswith("Day") and x.name.endswith(".py")]):
     print(f"Importing module {module_name}")
     timing = TimeIt(getattr(import_module(module_name), module_name))
     for method, execution_time in timing.items():
