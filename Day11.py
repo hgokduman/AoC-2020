@@ -41,6 +41,7 @@ class Day11(Puzzle.Puzzle):
     def ApplyRules(self, part):
         Changes = 0
         grid = copy.deepcopy(self.grid)
+        tolerance = 4 if part == 1 else 5
         for y in range(self.gridHeight):
             for x in range(self.gridWidth):
                 seat = grid[y][x]
@@ -49,7 +50,7 @@ class Day11(Puzzle.Puzzle):
                     if seat == EMPTY and OccupiedSeats == 0:
                         self.grid[y][x] = OCCUPIED
                         Changes += 1
-                    elif seat == OCCUPIED and ((part == 1 and OccupiedSeats >= 4) or (part == 2 and OccupiedSeats >= 5)):
+                    elif seat == OCCUPIED and OccupiedSeats >= tolerance:
                         self.grid[y][x] = EMPTY
                         Changes += 1
     
