@@ -15,37 +15,11 @@ class Day11(Puzzle.Puzzle):
     def PrepareData(self):
         self.data = [x for x in self.Resource.SplitLines().Get()]
 
-    def AdjacentSeats(self, grid, x, y):
+    def OccupiedAdjacentSeats(self, grid, x, y):
         checkPositions = [(x+moveX, y+moveY) for moveX, moveY in DIRECTIONS if 0 <= x+moveX < self.gridWidth and 0 <= y+moveY < self.gridHeight ]
-        occupiedSeats = sum([grid[posY][posX] == OCCUPIED for posX, posY in checkPositions])
-        return occupiedSeats
+        return sum([grid[posY][posX] == OCCUPIED for posX, posY in checkPositions])
 
-    def SolvePartOne(self):
-        self.Reset()
-        def ApplyRules():
-            Changes = 0
-            grid = copy.deepcopy(self.grid)
-            for y in range(self.gridHeight):
-                for x in range(self.gridWidth):
-                    seat = grid[y][x]
-                    if not seat == FLOOR:
-                        adjacentSeats = self.AdjacentSeats(grid, x, y)
-                    if seat == EMPTY and adjacentSeats == 0:
-                        self.grid[y][x] = OCCUPIED
-                        Changes += 1
-                    elif seat == OCCUPIED and adjacentSeats >= 4:
-                        self.grid[y][x] = EMPTY
-                        Changes += 1
-        
-            OccupiedSeats = sum([sum([x == OCCUPIED for x in y]) for y in grid])
-            return (Changes, OccupiedSeats)
-        
-        while True:
-            Changes, Occupied = ApplyRules()
-            if Changes == 0:
-                return Occupied
-
-    def VisibleSeats(self, grid, x, y):
+    def OccupiedVisibleSeats(self, grid, x, y):
         checkPositions = []
         def FindFirstSeat(directionX, directionY):
             posX, posY = x, y
@@ -62,31 +36,38 @@ class Day11(Puzzle.Puzzle):
             if seat is not None:
                 checkPositions.append((seat[0], seat[1]))
 
-        occupiedSeats = sum([grid[posY][posX] == OCCUPIED for posX, posY in checkPositions])
-        return occupiedSeats
+        return sum([grid[posY][posX] == OCCUPIED for posX, posY in checkPositions])
 
-    def SolvePartTwo(self):
-        self.Reset()
-        def ApplyRules():
-            Changes = 0
-            grid = copy.deepcopy(self.grid)
-            for y in range(self.gridHeight):
-                for x in range(self.gridWidth):
-                    seat = grid[y][x]
-                    if not seat == FLOOR:
-                        visibleSeats = self.VisibleSeats(grid, x, y)
-                    if seat == EMPTY and visibleSeats == 0:
+    def ApplyRules(self, part):
+        Changes = 0
+        grid = copy.deepcopy(self.grid)
+        for y in range(self.gridHeight):
+            for x in range(self.gridWidth):
+                seat = grid[y][x]
+                if not seat == FLOOR:
+                    OccupiedSeats = self.OccupiedAdjacentSeats(grid, x, y) if part == 1 else self.OccupiedVisibleSeats(grid, x, y)
+                    if seat == EMPTY and OccupiedSeats == 0:
                         self.grid[y][x] = OCCUPIED
                         Changes += 1
-                    elif seat == OCCUPIED and visibleSeats >= 5:
+                    elif seat == OCCUPIED and ((part == 1 and OccupiedSeats >= 4) or (part == 2 and OccupiedSeats >= 5)):
                         self.grid[y][x] = EMPTY
                         Changes += 1
-        
-            OccupiedSeats = sum([sum([x == OCCUPIED for x in y]) for y in grid])
-            return (Changes, OccupiedSeats)
-        
+    
+        TotalOccupiedSeats = sum([sum([x == OCCUPIED for x in y]) for y in grid])
+        return (Changes, TotalOccupiedSeats)
+
+    def SolvePartOne(self):
+        self.Reset()
+
         while True:
-            Changes, Occupied = ApplyRules()
+            Changes, Occupied = self.ApplyRules(1)
+            if Changes == 0:
+                return Occupied
+
+    def SolvePartTwo(self):
+        self.Reset()       
+        while True:
+            Changes, Occupied = self.ApplyRules(2)
             if Changes == 0:
                 return Occupied
 
