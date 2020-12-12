@@ -1,10 +1,7 @@
 from AoC.Resource import Resource
 from AoC import Display, Puzzle
-import copy
-import itertools
 
 class Day12(Puzzle.Puzzle):
-    headings = [(0, -1), (1, 0), (0, 1), (-1, 0)]
     heading = None
     ship = None
     waypoint = None
@@ -12,89 +9,52 @@ class Day12(Puzzle.Puzzle):
     def PrepareData(self):
         self.data = [(x[0], int(x[1:])) for x in self.Resource.SplitLines().Get()]
 
-    def SolvePartOne(self):
-        def Move(action, value):
-            posX, posY = self.ship
-            if action == "N":
-                posY += -value
-            elif action == "S":
-                posY += value
-            elif action == "E":
-                posX += value
-            elif action == "W":
-                posX -= value
-            elif action == "F":
-                posX += value * self.heading[0]
-                posY += value * self.heading[1]
+    def GetManhattanDistance(self):
+        return abs(self.ship[0])+abs(self.ship[1])
 
-            return (posX, posY)
+    def Move(self, action, value, pos, multiplier=None):
+        posX, posY = pos
+        if action in ["N", "S"]:
+            posY += value if action == "S" else -value
+        elif action in ["E", "W"]:
+            posX += value if action == "E" else -value
+        elif action == "F":
+            if multiplier is None:
+                raise Exception ("No multiplier!")
+            posX += value * multiplier[0]
+            posY += value * multiplier[1]          
+
+        return (posX, posY)
+ 
+    def Rotate(self, action, value, pos):
+        posX, posY = pos
+
+        for _ in range(int(value/90)):
+            newX = -posY if action == "R" else posY
+            newY = posX if action == "R" else -posX
+            posX, posY = (newX, newY)
+
+        return (posX, posY)
         
-        def Rotate(action, value):
-            index = self.headings.index(self.heading)
-            nextIndexOffset = int(value/90)
-            if action == "L":
-                index -= nextIndexOffset
-            elif action == "R":
-                index += nextIndexOffset
-            return self.headings[index%len(self.headings)]
-
+    def SolvePartOne(self):       
         self.Reset()
         for action, value in self.data:
             if action in ["R", "L"]:
-                self.heading = Rotate(action, value)
+                self.heading = self.Rotate(action, value, self.heading)
             else:
-                self.ship = Move(action, value)
-        return sum(list(self.ship))
+                self.ship = self.Move(action, value, self.ship, self.heading)
+        return self.GetManhattanDistance()
 
     def SolvePartTwo(self):
         self.Reset()
-        def MoveShip(value):
-            ShipX, ShipY = self.ship
-            WayX, WayY = self.waypoint
-            ShipX += WayX*value
-            ShipY += WayY*value
-            return (ShipX,ShipY)
-
-        def Move(action, value):
-            posX, posY = self.waypoint
-            if action == "N":
-                posY += -value
-            elif action == "S":
-                posY += value
-            elif action == "E":
-                posX += value
-            elif action == "W":
-                posX -= value
-
-            return (posX, posY)
-
-        def Rotate(action, value):
-            newX, newY = (0,0)
-            posX, posY = self.waypoint
-
-            degrees  = value
-            if degrees == 90:
-                newX = -posY if action == "R" else posY
-                newY = posX if action == "R" else -posX
-            elif degrees == 180:
-                newX = -posX
-                newY = -posY
-            elif degrees == 270:
-                newX = posY if action == "R" else -posY
-                newY = -posX if action == "R" else posX
-
-            return (newX, newY)  
-
         for action, value in self.data:
             if action in ["F"]:
-                self.ship = MoveShip(value)
+                self.ship = self.Move(action, value, self.ship, self.waypoint)
             elif action in ["E", "W", "N", "S"]:
-                self.waypoint = Move(action, value)
+                self.waypoint = self.Move(action, value, self.waypoint)
             elif action in ["R", "L"]:
-                print(action, value)
-                self.waypoint = Rotate(action, value)
-        return sum(list(map(abs, list(self.ship))))
-
+                self.waypoint = self.Rotate(action, value, self.waypoint)
+        return self.GetManhattanDistance()
 
     def Reset(self):
         self.heading = (1,0)
