@@ -1,5 +1,4 @@
-from AoC.Resource import Resource
-from AoC import Display, Puzzle
+from AoC import Utils, Puzzle, Resource
 import copy
 import itertools
 
@@ -65,11 +64,11 @@ class Day11(Puzzle.Puzzle):
     def SolvePartOne(self):
         return self.Run(1, 4)
 
-    def SolvePartTwo1(self):
+    def SolvePartTwo(self):
         return self.Run(2, 5)
 
     def Reset(self):
         self.grid = [[s for s in x] for x in self.data]
                 
 if __name__ == '__main__':
-    Display.DisplayAnswers(Day11(Resource(11)))
+    Utils.ShowAnswers(Day11(Resource.Resource(11)))

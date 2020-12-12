@@ -1,6 +1,4 @@
-from AoC.Resource import Resource
-from AoC import Display
-from AoC import Puzzle
+from AoC import Utils, Puzzle, Resource
 import itertools 
 
 class Day05(Puzzle.Puzzle):
@@ -31,4 +29,4 @@ class Day05(Puzzle.Puzzle):
         return list(filter(lambda x: x-1 in OccupiedSeats and x+1 in OccupiedSeats, FreeSeats))[0]
 
 if __name__ == '__main__':
-    Display.DisplayAnswers(Day05(Resource(5)))
+    Utils.ShowAnswers(Day05(Resource.Resource(5)))

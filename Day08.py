@@ -1,6 +1,4 @@
-from AoC.Resource import Resource
-from AoC import Display
-from AoC import Puzzle
+from AoC import Utils, Puzzle, Resource
 
 class Day08(Puzzle.Puzzle):
     instructions = []
@@ -55,4 +53,4 @@ class Day08(Puzzle.Puzzle):
         return None
 
 if __name__ == '__main__':        
-    Display.DisplayAnswers(Day08(Resource(8)))
+    Utils.ShowAnswers(Day08(Resource.Resource(8)))

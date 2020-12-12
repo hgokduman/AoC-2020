@@ -1,5 +1,4 @@
-from AoC.Resource import Resource
-from AoC import Display, Puzzle
+from AoC import Utils, Puzzle, Resource
 
 class Day12(Puzzle.Puzzle):
     heading = None
@@ -60,7 +59,6 @@ class Day12(Puzzle.Puzzle):
         self.heading = (1,0)
         self.ship = (0, 0)
         self.waypoint = (10, -1)
-
-                
+              
 if __name__ == '__main__':
-    Display.DisplayAnswers(Day12(Resource(12)))
+    Utils.ShowAnswers(Day12(Resource.Resource(12)))

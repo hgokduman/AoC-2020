@@ -1,6 +1,4 @@
-from AoC.Resource import Resource
-from AoC import Display
-from AoC import Puzzle
+from AoC import Utils, Puzzle, Resource
 import re
 
 class Day07(Puzzle.Puzzle):
@@ -27,4 +25,4 @@ class Day07(Puzzle.Puzzle):
         return self.BagsInside("shiny gold")
 
 if __name__ == '__main__':
-    Display.DisplayAnswers(Day07(Resource(7)))
+    Utils.ShowAnswers(Day07(Resource.Resource(7)))

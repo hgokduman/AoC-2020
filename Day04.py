@@ -1,6 +1,4 @@
-from AoC.Resource import Resource
-from AoC import Display
-from AoC import Puzzle
+from AoC import Utils, Puzzle, Resource
 import re
 
 class Day04(Puzzle.Puzzle):
@@ -33,4 +31,4 @@ class Day04(Puzzle.Puzzle):
         return(ValidPasswords)
 
 if __name__ == '__main__':
-    Display.DisplayAnswers(Day04(Resource(4)))
+    Utils.ShowAnswers(Day04(Resource.Resource(4)))

@@ -1,6 +1,4 @@
-from AoC.Resource import Resource
-from AoC import Display
-from AoC import Puzzle
+from AoC import Utils, Puzzle, Resource
 import numpy as np
 
 class Day03(Puzzle.Puzzle):
@@ -37,4 +35,4 @@ class Day03(Puzzle.Puzzle):
         self.Trees = 0
 
 if __name__ == '__main__':
-    Display.DisplayAnswers(Day03(Resource(3)))
+    Utils.ShowAnswers(Day03(Resource.Resource(3)))

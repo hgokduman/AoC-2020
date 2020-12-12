@@ -1,5 +1,4 @@
-from AoC.Resource import Resource
-from AoC import Display, Puzzle
+from AoC import Utils, Puzzle, Resource
 import numpy as np
 from itertools import groupby
 from functools import reduce 
@@ -20,4 +19,4 @@ class Day10(Puzzle.Puzzle):
         return reduce(operator.mul, [7 if x == 4 else 4 if x == 3 else x for x in seq if x != 1], 1)
                 
 if __name__ == '__main__':
-    Display.DisplayAnswers(Day10(Resource(10)))
+    Utils.ShowAnswers(Day10(Resource.Resource(10)))

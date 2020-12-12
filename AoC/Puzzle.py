@@ -1,3 +1,5 @@
+#import AoC.Utils
+import time
 class Puzzle:
     Resource = None
 
@@ -8,14 +10,30 @@ class Puzzle:
     def PrepareData(self):
         pass
 
-    def SolvePartOne(self):
-        pass
+    def timeit(method):
+        def timed(*args, **kw):
+            ts = time.time()
+            result = method(*args, **kw)
+            te = time.time()
+            return (result, (te-ts)*1000)
+        return timed
 
-    def SolvePartTwo(self):
-        pass
-    
+    @timeit
+    def PartOne(self):
+        if hasattr(self.__class__, "SolvePartOne"):
+            return self.SolvePartOne()
+        else:
+            return None
+
+    @timeit
+    def PartTwo(self):
+        if hasattr(self.__class__, "SolvePartTwo"):
+            return self.SolvePartTwo()
+        else:
+            return None
+
     def Reset(self):
         pass
 
     def Solve(self):
-        return [self.SolvePartOne(), self.SolvePartTwo()]
+        return [self.PartOne(), self.PartTwo()]

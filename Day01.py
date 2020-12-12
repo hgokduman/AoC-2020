@@ -1,6 +1,4 @@
-from AoC.Resource import Resource
-from AoC import Display
-from AoC import Puzzle
+from AoC import Utils, Puzzle, Resource
 import numpy as np
 from itertools import permutations
 
@@ -21,4 +19,4 @@ class Day01(Puzzle.Puzzle):
         return self.GetSumOfMultiplication(3)
 
 if __name__ == '__main__':
-    Display.DisplayAnswers(Day01(Resource(1)))
+    Utils.ShowAnswers(Day01(Resource.Resource(1)))

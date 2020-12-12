@@ -1,6 +1,4 @@
-from AoC.Resource import Resource
-from AoC import Display
-from AoC import Puzzle
+from AoC import Utils, Puzzle, Resource
 from itertools import combinations
 
 class Day09(Puzzle.Puzzle):
@@ -34,4 +32,4 @@ class Day09(Puzzle.Puzzle):
         return min(ContiguousSet)+max(ContiguousSet)
                 
 if __name__ == '__main__':
-    Display.DisplayAnswers(Day09(Resource(9)))
+    Utils.ShowAnswers(Day09(Resource.Resource(9)))
