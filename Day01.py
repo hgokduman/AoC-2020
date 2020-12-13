@@ -1,6 +1,6 @@
 from AoC import Utils, Puzzle, Resource
 import numpy as np
-from itertools import permutations
+from itertools import combinations
 
 class Day01(Puzzle.Puzzle):
     def PrepareData(self):
@@ -8,7 +8,7 @@ class Day01(Puzzle.Puzzle):
 
     def GetSumOfMultiplication(self, length, target=2020):
         self.Reset()
-        for x in permutations(self.data, length):
+        for x in combinations(self.data, length):
             if sum(x) == target:
                 return(np.prod(x))
 
