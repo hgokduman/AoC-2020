@@ -1,5 +1,4 @@
 from AoC import Utils, Puzzle, Resource
-import copy
 import itertools
 
 FLOOR = "."
@@ -21,14 +20,7 @@ class Day11(Puzzle.Puzzle):
         self.seats = [(x,y) for x,y in self.points if self.grid[y][x] != FLOOR]
 
     def OccupiedAdjacentSeats(self, x, y):
-        checkPositions = [(x+moveX, y+moveY) for moveX, moveY in DIRECTIONS if self.IsValidPosition(x+moveX, y+moveY)]
-        return sum([self.grid[posY][posX] == OCCUPIED for posX, posY in checkPositions])
-
-    def IsValidPosition(self, x, y):
-        return 0<=x<self.gridWidth and 0<=y<self.gridHeight
-
-    def IsSeat(self, x, y):
-        return self.IsValidPosition(x,y) and self.grid[y][x] != FLOOR #(x,y) in self.seats
+        return sum([0<=x+moveX<self.gridWidth and 0<=y+moveY<self.gridHeight and self.grid[y+moveY][x+moveX] == OCCUPIED for moveX, moveY in DIRECTIONS])
 
     def OccupiedVisibleSeats(self,  x, y):
         checkPositions = []
@@ -36,10 +28,7 @@ class Day11(Puzzle.Puzzle):
             posX, posY = x, y
             while True:
                 posX, posY = posX+directionX, posY+directionY
-                if self.IsSeat(posX, posY):
-                    return (posX, posY)
-                else:
-                    return None
+                return (posX, posY) if 0<=posX<self.gridWidth and 0<=posY<self.gridHeight and self.grid[posY][posX] in [EMPTY, OCCUPIED] else None
 
         for moveX, moveY in DIRECTIONS:
             seat = FindFirstSeat(moveX, moveY)
