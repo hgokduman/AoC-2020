@@ -16,7 +16,7 @@ class Day14(Puzzle.Puzzle):
                 p = v
                 m = []
             else:
-                k = Utils.Replace(k, ["mem[", "]"], "")
+                k = k.lstrip("mem[").rstrip("]")
                 m.append((int(k),int(v)))
         self.program.append((p, m))
 
