@@ -19,7 +19,7 @@ class Day15(Puzzle.Puzzle):
     def SolvePartOne(self):
          return self.Run(self.data, 2020)
 
-    def SolvePartTwoa(self):
+    def SolvePartTwo(self):
         return self.Run(self.data, 30000000)
 
 if __name__ == '__main__':
